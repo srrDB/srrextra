@@ -21,6 +21,7 @@
 	console.clear();
 	var objs = [];
 	var toRun = $("div.lister-item.mode-advanced");
+	var idPattern = /\d{7}/;
 
 	//run complete
 	function printSummary() {
@@ -30,7 +31,8 @@
 
 	$("div.lister-item.mode-advanced").each(function(index) {
 		var title = $(this).find(".lister-item-header a").text();
-		var imdbId = $(this).find(".lister-item-header a").attr("href").substring(9, 16); //onlt supports 7 digits imdb ids
+		var imdbUrl = $(this).find(".lister-item-header a").attr("href");
+		var imdbId = idPattern.exec(imdbUrl);
 
 		var year = parseInt($(this).find(".lister-item-year").text().substring(1, 5));
 		var rating = parseFloat($(this).find(".ratings-imdb-rating strong").text().replace(",", "."));
