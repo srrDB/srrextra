@@ -26,12 +26,13 @@
 	<span class="ab_widget"><div class="ab_ninja">
 		<span class="widget_header">
 			<span class="oneline">
-				<a title="Show more..." target="_blank" href="https://www.srrdb.com/browse/imdb%3Att${imdbId}/1"><h3>Scene releases - srrDB</h3></a>
+				<a title="Show more..." target="_blank" href="https://www.srrdb.com/"><h3>Scene releases - srrDB</h3></a>
 			</span>
 		</span>
 <ul id="release-lister" style="margin-bottom: 0;">
 <li id="release-loading">Loading releases...</li>
 </ul>
+<div style="margin-top: 15px; text-align: right;"><a target="_blank" href="https://www.srrdb.com/browse/imdb%3Att${imdbId}/1">Show more...</a></div>
 		</div>
 	</span>
 </div>
