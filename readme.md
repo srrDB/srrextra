@@ -11,7 +11,7 @@ This is Tampermoneky scripts designed to integrate on IMDb for easy scene releas
 
 ### Multiple page
 
-![Multiple](img/single.png)
+![Multiple](img/multiple.png)
 
 ## Requirements
 - Google Chrome
