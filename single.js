@@ -1,12 +1,16 @@
 // ==UserScript==
-// @name		Srrdb release lister for IMDB (single)
+// @name		srrDB release lister for IMDB (single)
 // @namespace	https://srrdb.com/
-// @version		0.1
+// @updateURL   https://bitbucket.org/srrdb/srrextra/raw/master/single.js
+// @version		0.2
 // @description	Lists releases from srrdb.com on imdb.com
 // @author		Skalman
+// @author		Lazur
 // @match		https://imdb.com/title/*
 // @match		https://*.imdb.com/title/*
-// @grant		none
+// @require     https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js
+// @grant       GM_addStyle
+// @grant       GM_setClipboard
 // ==/UserScript==
 
 /*global $*/
@@ -15,6 +19,14 @@
 	'use strict';
 
 	console.clear();
+
+    // Add styles
+    GM_addStyle('.release { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }');
+    GM_addStyle('.release a { border-radius:3px; }');
+    GM_addStyle('.copy-release-name { display:inline-block; border-radius:3px; cursor:pointer; margin-right:5px; color:black; }');
+    GM_addStyle('.blink-text { animation: blinker 0.1s steps(2) 4; }');
+    GM_addStyle('@keyframes blinker { from { background-color:rgba(245,197,24,0); } to { color:#000; background-color:rgba(245,197,24,1); } }');
+
 	var idPattern = /\d{7}/;
 	var imdbId = idPattern.exec(document.location.href);
 
@@ -50,9 +62,19 @@
 			var releasename = value.release;
 			var url = `https://www.srrdb.com/release/details/${releasename}`;
 
-			var repeatHtml = `<li title="${releasename}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a target="_blank" href="${url}">${releasename}</a></li>`;
+			var repeatHtml = `<li class="release" title="${releasename}"><i class="copy-release-name far fa-copy"></i><a target="_blank" href="${url}">${releasename}</a></li>`;
 
 			$("#release-lister").append(repeatHtml);
 		});
 	});
+
+    $(document).on('click', '.copy-release-name', function(evt){
+        var select = $(this).next();
+        GM_setClipboard(select.text());
+
+        select.addClass('blink-text');
+        setTimeout(function(){ select.removeClass('blink-text') }, 500);
+
+        evt.preventDefault();
+    });
 })();
