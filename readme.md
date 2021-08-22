@@ -17,9 +17,18 @@ This is Tampermonkey scripts designed to integrate on IMDb for easy scene releas
 ![Multiple](img/multiple.png)
 
 ## Requirements
-- Google Chrome
-    - Tampermonkey plugin:
-	https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en
+- Tampermonkey:
+    - Google Chrome:
+	https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo
+
+    - Mozilla Firefox
+	https://addons.mozilla.org/firefox/addon/tampermonkey/
+
+    - Microsoft Edge
+	https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd
+
+    - Opera
+	https://addons.opera.com/en/extensions/details/tampermonkey-beta/
 
 ## Installation
 Install Chrome (or Firefox) with the Tampermonkey plugin. Then simple add the scripts you want.
