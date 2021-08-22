@@ -1,7 +1,7 @@
 # srrextra
 
 ## Introduction
-This is Tampermoneky scripts designed to integrate on IMDb for easy scene release lookup.
+This is Tampermonkey scripts designed to integrate on IMDb for easy scene release lookup.
 
 ## Results
 
@@ -18,7 +18,7 @@ This is Tampermoneky scripts designed to integrate on IMDb for easy scene releas
 
 ## Requirements
 - Google Chrome
-    - TemperMonkey plugin:
+    - Tampermonkey plugin:
 	https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en
 
 ## Installation
