@@ -10,7 +10,7 @@ This is Tampermonkey scripts designed to integrate on IMDb for easy scene releas
 #### Single page
 ![Single](img/imdb/single.png)
 
-##### (Old design)
+#### (Old design)
 ![Single](img/imdb/single_old.png)
 
 #### Multiple page
