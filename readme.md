@@ -5,16 +5,19 @@ This is Tampermonkey scripts designed to integrate on IMDb for easy scene releas
 
 ## Results
 
-### Single page
+### IMDB
 
-![Single](img/single.png)
+#### Single page
+![Single](img/imdb/single.png)
 
 #### (Old design)
-![Single](img/single_old.png)
+![Single](img/imdb/single_old.png)
 
-### Multiple page
+#### Multiple page
+![Multiple](img/imdb/multiple.png)
 
-![Multiple](img/multiple.png)
+### Trakt
+![Single](img/trakt/single.png)
 
 ## Requirements
 - Tampermonkey:
