@@ -51,7 +51,8 @@
 </div>
 `;
 	//$(html).prependTo($("#sidebar"));
-	$(html).prependTo($(".WatchBox__WatchParent-sc-1kx3ihk-5"));
+	//$(html).prependTo($(".WatchBox__WatchParent-sc-1kx3ihk-5"));
+	$(html).prependTo($("button[data-testid='tm-box-wl-button']").parent().parent());
 
 	$.ajax({
 		dataType: "json",
