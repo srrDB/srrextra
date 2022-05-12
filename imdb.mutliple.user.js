@@ -52,7 +52,7 @@
 		};
 		//console.log(obj);
 
-		var url = `https://www.srrdb.com/api/search/imdb:${obj.imdbId}/foreign:no/category:x264/720/--internal/--hdtv/--subfix/--nfofix`;
+		var url = `https://api.srrdb.com/v1/search/imdb:${obj.imdbId}/foreign:no/category:x264/720/--internal/--hdtv/--subfix/--nfofix`;
 		var self = $(this);
 
 		$.ajax({
