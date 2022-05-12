@@ -31,7 +31,7 @@
 	var idPattern = /\d{7,8}/;
 	var imdbId = idPattern.exec(document.location.href);
 
-	var url = `https://www.srrdb.com/api/search/imdb:${imdbId}/foreign:no/category:x264/720/--internal/--hdtv/--subfix/--nfofix`;
+	var url = `https://api.srrdb.com/v1/search/imdb:${imdbId}/foreign:no/category:x264/720/--internal/--hdtv/--subfix/--nfofix`;
 	var self = $(this);
 
 	var html = `
