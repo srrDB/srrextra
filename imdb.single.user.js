@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		srrDB release lister for IMDB (single)
-// @namespace	https://srrdb.com/
-// @updateURL   https://raw.githubusercontent.com/srrDB/srrextra/master/single.js
+// @namespace		https://srrdb.com/
+// @updateURL		https://raw.githubusercontent.com/srrDB/srrextra/master/imdb.single.user.js
 // @version		0.3
 // @description	Lists releases from srrdb.com on imdb.com
 // @author		Skalman
