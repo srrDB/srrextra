@@ -24,14 +24,14 @@
 	// Configuration -----------------------------------------------------------
 	var resolution = '720p';
 	var showInternal = true;
-	var showHDTV = true;
+	var showHDTV = false;
 
 	var highlightHDTV = true;
 	var highlightProper = true;
 	var highlightInternal = true;
 	var highlightRemastered = true;
 
-	var showForeign = true;
+	var showForeign = false;
 	var highlightForeign = true;
 
 	var highlightColor = 'rgb(245, 197, 24)'; // default
