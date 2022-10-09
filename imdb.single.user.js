@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		srrDB release lister for IMDB (single)
 // @namespace	https://srrdb.com/
-// @updateURL   https://raw.githubusercontent.com/srrDB/srrextra/master/single.js
+// @updateURL	https://raw.githubusercontent.com/srrDB/srrextra/master/single.js
 // @version		0.4 RC1
 // @description	Lists releases from srrdb.com on imdb.com
 // @author		Skalman
@@ -21,23 +21,23 @@
 
 	console.clear();
 
-    // Configuration -----------------------------------------------------------
-    var resolution = '720p';
-    var showInternal = true;
-    var showHDTV = true;
+	// Configuration -----------------------------------------------------------
+	var resolution = '720p';
+	var showInternal = true;
+	var showHDTV = true;
 
-    var highlightHDTV = true;
-    var highlightProper = true;
-    var highlightInternal = true;
-    var highlightRemastered = true;
+	var highlightHDTV = true;
+	var highlightProper = true;
+	var highlightInternal = true;
+	var highlightRemastered = true;
 
-    var showForeign = true;
-    var highlightForeign = true;
+	var showForeign = true;
+	var highlightForeign = true;
 
-    var highlightColor = 'rgb(245, 197, 24)'; // default
-    var highlightHDTVColor = 'rgb(220, 20, 40)';
-    var highlightLanguageColor = 'rgb(127, 106, 252)';
-    // -------------------------------------------------------------------------
+	var highlightColor = 'rgb(245, 197, 24)'; // default
+	var highlightHDTVColor = 'rgb(220, 20, 40)';
+	var highlightLanguageColor = 'rgb(127, 106, 252)';
+	// -------------------------------------------------------------------------
 
 	// Add styles
 	GM_addStyle(`.release { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:10pt!important; letter-spacing:-0.5px; }`);
@@ -49,9 +49,9 @@
 	GM_addStyle(`.blink-text { animation: blinker 0.1s steps(2) 4; }`);
 	GM_addStyle(`@keyframes blinker { from { background-color:rgba(245,197,24,0); } to { color:#000; background-color:rgba(245,197,24,1); } }`);
 
-    var searchForeign = showForeign ? '' : 'foreign:no/';
-    var searchInternal = showInternal ? '' : '--internal/';
-    var searchHDTV = showHDTV ? '' : '--hdtv/';
+	var searchForeign = showForeign ? '' : 'foreign:no/';
+	var searchInternal = showInternal ? '' : '--internal/';
+	var searchHDTV = showHDTV ? '' : '--hdtv/';
 	var idPattern = /\d{7,8}/;
 	var imdbId = idPattern.exec(document.location.href);
 
@@ -84,26 +84,26 @@
 	}).done(function(data) {
 		var releases = data.results;
 
-        if(releases.length > 0){
-            $("#release-loading").remove();
-        } else {
-            $("#release-loading").text(`No ${resolution} release found...`);
-        }
+		if(releases.length > 0){
+			$("#release-loading").remove();
+		} else {
+			$("#release-loading").text(`No ${resolution} release found...`);
+		}
 
 		$.each(releases, function( index, value ) {
 			var releasename = value.release;
-            var url = `https://www.srrdb.com/release/details/${releasename}`;
+			var url = `https://www.srrdb.com/release/details/${releasename}`;
 
-            var releaseNameText = releasename;
-            releaseNameText = highlightHDTV ? releaseNameText.replace(/(HDTV)/ig, '<span class="highlight-hdtv">$1</span>') : releaseNameText;
+			var releaseNameText = releasename;
+			releaseNameText = highlightHDTV ? releaseNameText.replace(/(HDTV)/ig, '<span class="highlight-hdtv">$1</span>') : releaseNameText;
 
-            releaseNameText = highlightProper ? releaseNameText.replace(/(PROPER)/ig, '<span class="highlight">$1</span>') : releaseNameText;
-            releaseNameText = highlightInternal ? releaseNameText.replace(/(iNTERNAL)/ig, '<span class="highlight">$1</span>') : releaseNameText;
-            releaseNameText = highlightRemastered ? releaseNameText.replace(/(REMASTERED)/ig, '<span class="highlight">$1</span>') : releaseNameText;
+			releaseNameText = highlightProper ? releaseNameText.replace(/(PROPER)/ig, '<span class="highlight">$1</span>') : releaseNameText;
+			releaseNameText = highlightInternal ? releaseNameText.replace(/(iNTERNAL)/ig, '<span class="highlight">$1</span>') : releaseNameText;
+			releaseNameText = highlightRemastered ? releaseNameText.replace(/(REMASTERED)/ig, '<span class="highlight">$1</span>') : releaseNameText;
 
-            releaseNameText = highlightForeign ? releaseNameText.replace(/(FRENCH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
-            releaseNameText = highlightForeign ? releaseNameText.replace(/(POLISH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
-            releaseNameText = highlightForeign ? releaseNameText.replace(/(GERMAN)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(FRENCH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(POLISH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(GERMAN)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
 
 			var repeatHtml = `<li class="release ipc-link ipc-link--baseAlt" title="${releasename}"><i class="ipc-link ipc-link--baseAlt copy-release-name far fa-copy"></i><a class="ipc-link ipc-link--baseAlt" target="_blank" href="${url}">${releaseNameText}</a></li>`;
 
