@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		srrDB release lister for IMDB (single)
 // @namespace	https://srrdb.com/
-// @updateURL	https://raw.githubusercontent.com/srrDB/srrextra/master/single.js
+// @updateURL	https://raw.githubusercontent.com/srrDB/srrextra/master/imdb.single.user.js
 // @version		0.4 RC1
 // @description	Lists releases from srrdb.com on imdb.com
 // @author		Skalman
@@ -55,7 +55,7 @@
 	var idPattern = /\d{7,8}/;
 	var imdbId = idPattern.exec(document.location.href);
 
-	var url = `https://www.srrdb.com/api/search/imdb:${imdbId}/${searchForeign}category:x264/${resolution}/${searchInternal}${searchHDTV}--subfix/--nfofix`;
+	var url = `https://api.srrdb.com/v1/search/imdb:${imdbId}/${searchForeign}category:x264/${resolution}/${searchInternal}${searchHDTV}--subfix/--nfofix`;
 	var self = $(this);
 
 	var html = `
