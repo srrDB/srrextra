@@ -2,7 +2,7 @@
 // @name		srrDB release lister for IMDB (single)
 // @namespace	https://srrdb.com/
 // @updateURL	https://raw.githubusercontent.com/srrDB/srrextra/master/imdb.single.user.js
-// @version		0.4 RC1
+// @version		0.4 RC2
 // @description	Lists releases from srrdb.com on imdb.com
 // @author		Skalman
 // @author		Lazur
@@ -40,14 +40,15 @@
 	// -------------------------------------------------------------------------
 
 	// Add styles
-	GM_addStyle(`.release { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:10pt!important; letter-spacing:-0.5px; }`);
-	GM_addStyle(`.release a { border-radius:3px; text-shadow:0 0 1px #000; }`);
-	GM_addStyle(`.highlight { background-color:rgba(0,0,0,0.15); box-shadow: inset 0px 0px 2px 2px #000000, 0px 0px 1px ${highlightColor}; border-radius:4px; border-top:1px solid ${highlightColor}; border-bottom:1px solid ${highlightColor}; }`);
-	GM_addStyle(`.highlight-hdtv { background-color:rgba(0,0,0,0.15); box-shadow: inset 0px 0px 2px 2px #000000, 0px 0px 1px ${highlightHDTVColor}; border-radius:4px; border-top:1px solid ${highlightHDTVColor}; border-bottom:1px solid ${highlightHDTVColor}; }`);
-	GM_addStyle(`.highlight-foreign { background-color:rgba(0,0,0,0.15); box-shadow: inset 0px 0px 2px 2px #000000, 0px 0px 1px ${highlightLanguageColor}; border-radius:4px; border-top:1px solid ${highlightLanguageColor}; border-bottom:1px solid ${highlightLanguageColor}; }`);
-	GM_addStyle(`.copy-release-name { display:inline-block; border-radius:3px; cursor:pointer; margin-right:5px; }`);
-	GM_addStyle(`.blink-text { animation: blinker 0.1s steps(2) 4; }`);
-	GM_addStyle(`@keyframes blinker { from { background-color:rgba(245,197,24,0); } to { color:#000; background-color:rgba(245,197,24,1); } }`);
+	GM_addStyle(`.srrdb-releases {--highlight-default: ${highlightColor};--highlight-hdtv: ${highlightHDTVColor};--highlight-foreign: ${highlightLanguageColor};}`);
+	GM_addStyle(`.release {white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10pt;letter-spacing:-0.5px;display:block;}`);
+	GM_addStyle(`.release a {text-shadow:0 0 1px #000;display:inline;}`);
+	GM_addStyle(`.highlight {background-color:rgba(0,0,0,0.15);box-shadow: inset 0px 0px 2px 2px #000000, 0px 0px 1px var(--highlight-default);border-radius:4px;border-style:solid;border-width:1px 0;border-color:var(--highlight-default);}`);
+	GM_addStyle(`.highlight-hdtv {box-shadow: inset 0px 0px 2px 2px #000000, 0px 0px 1px var(--highlight-hdtv);border-color:var(--highlight-hdtv);}`);
+	GM_addStyle(`.highlight-foreign {box-shadow: inset 0px 0px 2px 2px #000000, 0px 0px 1px var(--highlight-foreign);border-color:var(--highlight-foreign);}`);
+	GM_addStyle(`.copy-release-name {display:inline-block;cursor:pointer;margin-right:5px;}`);
+	GM_addStyle(`.blink-text {animation: blinker 0.1s steps(2) 4;}`);
+	GM_addStyle(`@keyframes blinker {from {background-color:rgba(245,197,24,0);} to {color:#000;background-color:rgba(245,197,24,1);}}`);
 
 	var searchForeign = showForeign ? '' : 'foreign:no/';
 	var searchInternal = showInternal ? '' : '--internal/';
@@ -95,15 +96,15 @@
 			var url = `https://www.srrdb.com/release/details/${releasename}`;
 
 			var releaseNameText = releasename;
-			releaseNameText = highlightHDTV ? releaseNameText.replace(/(HDTV)/ig, '<span class="highlight-hdtv">$1</span>') : releaseNameText;
+			releaseNameText = highlightHDTV ? releaseNameText.replace(/(HDTV)/ig, '<span class="highlight highlight-hdtv">$1</span>') : releaseNameText;
 
 			releaseNameText = highlightProper ? releaseNameText.replace(/(PROPER)/ig, '<span class="highlight">$1</span>') : releaseNameText;
 			releaseNameText = highlightInternal ? releaseNameText.replace(/(iNTERNAL)/ig, '<span class="highlight">$1</span>') : releaseNameText;
 			releaseNameText = highlightRemastered ? releaseNameText.replace(/(REMASTERED)/ig, '<span class="highlight">$1</span>') : releaseNameText;
 
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(FRENCH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(POLISH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(GERMAN)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(FRENCH)/ig, '<span class="highlight highlight-foreign">$1</span>') : releaseNameText;
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(POLISH)/ig, '<span class="highlight highlight-foreign">$1</span>') : releaseNameText;
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(GERMAN)/ig, '<span class="highlight highlight-foreign">$1</span>') : releaseNameText;
 
 			var repeatHtml = `<li class="release ipc-link ipc-link--baseAlt" title="${releasename}"><i class="ipc-link ipc-link--baseAlt copy-release-name far fa-copy"></i><a class="ipc-link ipc-link--baseAlt" target="_blank" href="${url}">${releaseNameText}</a></li>`;
 
