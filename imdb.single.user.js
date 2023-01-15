@@ -31,6 +31,8 @@
 	var highlightInternal = true;
 	var highlightRemastered = true;
 
+	var haveList = [""]; //a list of releases
+
 	var showForeign = false;
 	var highlightForeign = true;
 
@@ -91,6 +93,9 @@
 			$("#release-loading").text(`No ${resolution} release found...`);
 		}
 
+		//TODO: loop instead of list below
+		var foreignLanguages = ["FRENCH", "GERMAN", "ITALIAN", "SPANISH", "POLISH", "SWEDISH", "DANiSH", "NORWEGiAN"];
+
 		$.each(releases, function( index, value ) {
 			var releasename = value.release;
 			var url = `https://www.srrdb.com/release/details/${releasename}`;
@@ -102,9 +107,20 @@
 			releaseNameText = highlightInternal ? releaseNameText.replace(/(iNTERNAL)/ig, '<span class="highlight">$1</span>') : releaseNameText;
 			releaseNameText = highlightRemastered ? releaseNameText.replace(/(REMASTERED)/ig, '<span class="highlight">$1</span>') : releaseNameText;
 
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(FRENCH)/ig, '<span class="highlight highlight-foreign">$1</span>') : releaseNameText;
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(POLISH)/ig, '<span class="highlight highlight-foreign">$1</span>') : releaseNameText;
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(GERMAN)/ig, '<span class="highlight highlight-foreign">$1</span>') : releaseNameText;
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(FRENCH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(GERMAN)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(ITALIAN)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(SPANISH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(POLISH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(SWEDISH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(DANiSH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+			releaseNameText = highlightForeign ? releaseNameText.replace(/(NORWEGiAN)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+
+			if(haveList.includes(releasename)) {
+				releaseNameText = '<span style="color:green;font-weight: bold;">&#10004;</span>&nbsp;' + releaseNameText;
+			}
 
 			var repeatHtml = `<li class="release ipc-link ipc-link--baseAlt" title="${releasename}"><i class="ipc-link ipc-link--baseAlt copy-release-name far fa-copy"></i><a class="ipc-link ipc-link--baseAlt" target="_blank" href="${url}">${releaseNameText}</a></li>`;
 
@@ -113,8 +129,8 @@
 	});
 
 	$(document).on('click', '.copy-release-name', function(evt){
-		var select = $(this).next();
-		GM_setClipboard(select.text());
+		var select = $(this).next().clone().children().remove().end(); //ugly way to remove the sub-span (green check mark)
+		GM_setClipboard(select.text().trim());
 
 		select.addClass('blink-text');
 		setTimeout(function(){ select.removeClass('blink-text') }, 500);
