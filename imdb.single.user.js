@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name		srrDB release lister for IMDB (single)
 // @namespace	https://srrdb.com/
+// @downloadURL	https://raw.githubusercontent.com/srrDB/srrextra/master/imdb.single.user.js
 // @updateURL	https://raw.githubusercontent.com/srrDB/srrextra/master/imdb.single.user.js
-// @version		0.4 RC2
+// @version		0.4RC2
 // @description	Lists releases from srrdb.com on imdb.com
 // @author		Skalman
 // @author		Lazur
@@ -50,6 +51,7 @@
 	GM_addStyle(`.highlight-foreign {box-shadow: inset 0px 0px 2px 2px #000000, 0px 0px 1px var(--highlight-foreign);border-color:var(--highlight-foreign);}`);
 	GM_addStyle(`.copy-release-name {display:inline-block;cursor:pointer;margin-right:5px;}`);
 	GM_addStyle(`.blink-text {animation: blinker 0.1s steps(2) 4;}`);
+	GM_addStyle(`.green-checkmark { color: green; font-weight: bold;}`);
 	GM_addStyle(`@keyframes blinker {from {background-color:rgba(245,197,24,0);} to {color:#000;background-color:rgba(245,197,24,1);}}`);
 
 	var searchForeign = showForeign ? '' : 'foreign:no/';
@@ -119,7 +121,7 @@
 			releaseNameText = highlightForeign ? releaseNameText.replace(/(NORWEGiAN)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
 
 			if(haveList.includes(releasename)) {
-				releaseNameText = '<span style="color:green;font-weight: bold;">&#10004;</span>&nbsp;' + releaseNameText;
+				releaseNameText = '<span class="green-checkmark">&#10004;</span>&nbsp;' + releaseNameText;
 			}
 
 			var repeatHtml = `<li class="release ipc-link ipc-link--baseAlt" title="${releasename}"><i class="ipc-link ipc-link--baseAlt copy-release-name far fa-copy"></i><a class="ipc-link ipc-link--baseAlt" target="_blank" href="${url}">${releaseNameText}</a></li>`;
@@ -129,8 +131,10 @@
 	});
 
 	$(document).on('click', '.copy-release-name', function(evt){
-		var select = $(this).next().clone().children().remove().end(); //ugly way to remove the sub-span (green check mark)
+		var select = $(this).next().clone().children().remove(".green-checkmark").end(); //ugly way to remove the sub-span (gren check mark)
 		GM_setClipboard(select.text().trim());
+
+		select = $(this).next();
 
 		select.addClass('blink-text');
 		setTimeout(function(){ select.removeClass('blink-text') }, 500);
