@@ -1,11 +1,11 @@
 # srrextra
 
-## Introduction
-This is Tampermonkey scripts designed to integrate on IMDb for easy scene release lookup.
+Collection of userscripts designed to integrate on various websites for easy scene release lookup using [srrDB API](https://www.srrdb.com/help#api)
 
-## Results
+## Compatible Websites
 
-### IMDB
+### [IMDb](https://www.imdb.com)
+<details><summary>Screenshots</summary>
 
 #### Single page
 ![Single](img/imdb/single.png)
@@ -13,27 +13,41 @@ This is Tampermonkey scripts designed to integrate on IMDb for easy scene releas
 #### (Old design)
 ![Single](img/imdb/single_old.png)
 
+#### Single page - Alternative
+![Single](img/imdb/single.alternative.jpg)
+
 #### Multiple page
 ![Multiple](img/imdb/multiple.png)
+</details>
 
-### Trakt
-![Single](img/trakt/single.png)
+### [Trakt](https://trakt.tv)
+<details><summary>Screenshots</summary>
 
-## Requirements
-- Tampermonkey:
-    - Google Chrome:
-	https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo
+#### Single Movie
+![Single](img/trakt/single.jpg)
+</details>
 
-    - Mozilla Firefox
-	https://addons.mozilla.org/firefox/addon/tampermonkey/
+### [TMDB](https://www.themoviedb.org)
+<details><summary>Screenshots</summary>
 
-    - Microsoft Edge
-	https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd
-
-    - Opera
-	https://addons.opera.com/en/extensions/details/tampermonkey-beta/
+#### Single Movie
+![Single](img/tmdb/single.jpg)
+</details>
 
 ## Installation
-Install Chrome (or Firefox) with the Tampermonkey plugin. Then simple add the scripts you want.
 
-It's possible the scripts also works for other browsers and plugins, please report back any more compatibility.
+Install your preferred userscript manager extension in your browser and add the desired scripts.
+
+### Userscript manager extensions
+- [Violentmonkey](https://violentmonkey.github.io/)⭐️
+    - [Google Chrome](https://chrome.google.com/webstore/detail/violent-monkey/jinjaccalgkegednnccohejagnlnfdag)
+    - [Mozilla Firefox](https://addons.mozilla.org/firefox/addon/violentmonkey/)
+    - [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/eeagobfjdenkkddmbclomhiblgggliao)
+- [Tampermonkey](https://www.tampermonkey.net/)
+    - [Google Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+    - [Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
+    - [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd)
+    - [Safari](https://apps.apple.com/us/app/tampermonkey/id1482490089)
+    - [Opera](https://addons.opera.com/en/extensions/details/tampermonkey-beta/)
+
+The scripts may also be compatible with other browsers and plugins; if you find any additional compatibility, please let us know.
