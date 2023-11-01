@@ -2,11 +2,11 @@
 // @name        srrDB release lister for Trakt.tv (single)
 // @icon        https://trakt.tv/favicon.ico
 // @namespace   https://srrdb.com/
-// @version     0.3.1
+// @version     1.0
 // @description Lists releases from srrdb.com on trakt.tv
+// @author      Pro-Tweaker
 // @author      Skalman
 // @author      Lazur
-// @author      Pro-Tweaker (adaptation to Trakt.tv)
 // @match       https://trakt.tv/movies/*
 // @grant       GM_addStyle
 // @grant       GM_setClipboard
@@ -40,22 +40,22 @@
   var url = `https://api.srrdb.com/v1/search/imdb:${imdbId}/foreign:no/category:x264/--internal/--hdtv/--subfix/--nfofix`;
 
   var html = `
-<div>
-  <h2 id="comments">
-    <strong>Scene releases - srrDB</strong>
-    <a class="see-more-link" target="_blank" href="https://www.srrdb.com/browse/imdb%3Att${imdbId}/1">
-      <div class="see-more">
-        <span class="see-more-text">Show more</span>
-        <div class="trakt-icon-circle-right fa"></div>
-      </div>
-    </a>
-  </h2>
-  <div style="margin-top: 20px;">
-    <ul id="release-lister" style="padding-left: 0; margin-bottom: 0;">
-      <li id="release-loading" class="release">Loading releases...</li>
-    </ul>
+  <div>
+    <h2 id="comments">
+      <strong>Scene releases - srrDB</strong>
+      <a class="see-more-link" target="_blank" href="https://www.srrdb.com/browse/imdb%3Att${imdbId}/1">
+        <div class="see-more">
+          <span class="see-more-text">Show more</span>
+          <div class="trakt-icon-circle-right fa"></div>
+        </div>
+      </a>
+    </h2>
+    <div style="margin-top: 20px;">
+      <ul id="release-lister" style="padding-left: 0; margin-bottom: 0;">
+        <li id="release-loading" class="release">Loading releases...</li>
+      </ul>
+    </div>
   </div>
-</div>
   `;
 
   $(html).insertBefore($("#actors"));
