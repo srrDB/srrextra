@@ -65,21 +65,22 @@
   var self = $(this);
 
   var html = `
-<div class="mini-article srrdb-releases" style="margin-bottom:10px">
-	<span class="ab_widget"><div class="ab_ninja">
-		<span class="widget_header">
-			<span class="oneline">
-				<a class="ipc-link ipc-link--baseAlt" style="margin-bottom:20px;" title="srrDB.com" target="_blank" href="https://www.srrdb.com/"><h3>Scene releases from srrDB.com</h3></a>
-			</span>
-		</span>
-<ul id="release-lister" style="margin-bottom: 0;">
-<li id="release-loading">Loading releases...</li>
-</ul>
-<div style="margin-top: 15px; text-align: right;"><a class="ipc-link ipc-link--baseAlt" target="_blank" href="https://www.srrdb.com/browse/imdb%3Att${imdbId}/1">Show more...</a></div>
-		</div>
-	</span>
-</div>
-`;
+  <div class="mini-article srrdb-releases" style="margin-bottom:10px">
+    <span class="ab_widget"><div class="ab_ninja">
+      <span class="widget_header">
+        <span class="oneline">
+          <a class="ipc-link ipc-link--baseAlt" style="margin-bottom:20px;" title="srrDB.com" target="_blank" href="https://www.srrdb.com/"><h3>Scene releases from srrDB.com</h3></a>
+        </span>
+      </span>
+      <ul id="release-lister" style="margin-bottom: 0;">
+        <li id="release-loading">Loading releases...</li>
+      </ul>
+      <div style="margin-top: 15px; text-align: right;">
+        <a class="ipc-link ipc-link--baseAlt" target="_blank" href="https://www.srrdb.com/browse/imdb%3Att${imdbId}/1">Show more...</a></div>
+      </div>
+    </span>
+  </div>
+  `;
   //$(html).prependTo($("#sidebar"));
   //$(html).prependTo($(".WatchBox__WatchParent-sc-1kx3ihk-5"));
   $(html).prependTo($("button[data-testid='tm-box-wl-button']").parent().parent());
