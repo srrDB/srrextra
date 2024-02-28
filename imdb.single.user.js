@@ -16,7 +16,8 @@
 // @grant		GM_setClipboard
 // ==/UserScript==
 
-/*global $*/
+/*global $,GM_addStyle,GM_setClipboard*/
+/*jshint esversion: 6 */
 
 (function () {
 	'use strict';
@@ -62,7 +63,6 @@
 	var imdbId = idPattern.exec(document.location.href);
 
 	var url = `https://api.srrdb.com/v1/search/imdb:${imdbId}/${searchForeign}category:x264/${resolution}/${searchInternal}${searchHDTV}--subfix/--nfofix`;
-	var self = $(this);
 
 	var html = `
 	<div class="mini-article srrdb-releases" style="margin-bottom:10px">
@@ -98,7 +98,7 @@
 		}
 
 		//TODO: loop instead of list below
-		var foreignLanguages = ["FRENCH", "GERMAN", "ITALIAN", "SPANISH", "POLISH", "SWEDISH", "DANiSH", "NORWEGiAN"];
+		var foreignLanguages = ["TRUEFRENCH", "SUBFRENCH", "FRENCH", "GERMAN", "ITALIAN", "SPANISH", "POLISH", "SWEDISH", "DANiSH", "NORWEGiAN", "FINNISH"];
 
 		$.each(releases, function (index, value) {
 			var releasename = value.release;
@@ -111,16 +111,10 @@
 			releaseNameText = highlightInternal ? releaseNameText.replace(/(iNTERNAL)/ig, '<span class="highlight">$1</span>') : releaseNameText;
 			releaseNameText = highlightRemastered ? releaseNameText.replace(/(REMASTERED)/ig, '<span class="highlight">$1</span>') : releaseNameText;
 
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(FRENCH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(GERMAN)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(ITALIAN)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(SPANISH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
-
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(POLISH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
-
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(SWEDISH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(DANiSH)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
-			releaseNameText = highlightForeign ? releaseNameText.replace(/(NORWEGiAN)/ig, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+			for(var i = 0; i < foreignLanguages.length; i++) {
+				var foreignRegEx = new RegExp("(" + foreignLanguages[i] + ")", "ig");
+				releaseNameText = highlightForeign ? releaseNameText.replace(foreignRegEx, '<span class="highlight-foreign">$1</span>') : releaseNameText;
+			}
 
 			if (haveList.includes(releasename)) {
 				releaseNameText = '<span class="green-checkmark">&#10004;</span>&nbsp;' + releaseNameText;
@@ -139,7 +133,7 @@
 		select = $(this).next();
 
 		select.addClass('blink-text');
-		setTimeout(function () { select.removeClass('blink-text') }, 500);
+		setTimeout(function () { select.removeClass('blink-text'); }, 500);
 
 		evt.preventDefault();
 	});
