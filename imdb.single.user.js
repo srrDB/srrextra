@@ -4,7 +4,7 @@
 // @namespace	https://srrdb.com/
 // @downloadURL https://raw.githubusercontent.com/srrDB/srrextra/master/imdb.single.user.js
 // @updateURL	https://raw.githubusercontent.com/srrDB/srrextra/master/imdb.single.user.js
-// @version		0.4.2
+// @version		0.4.3
 // @description Lists releases from srrdb.com on imdb.com
 // @author		Skalman
 // @author		Lazur
@@ -40,11 +40,12 @@
 	var highlightForeign = true;
 
 	const languagesToHighlight = [
+		'CZECH.DUAL', 'CZECH',
 		'DANISH',
 		'DUTCH',
 		'FiNNiSH',
-		'SUBFRENCH', 'TRUEFRENCH', 'FRENCH',
-		'GERMAN',
+		'FRENCH.QC', 'SUBFRENCH', 'TRUEFRENCH', 'FRENCH',
+		'GERMAN.DL', 'GERMAN.DUBBED.DL', 'GERMAN',
 		'iTALiAN',
 		'NORWEGiAN',
 		'POLISH', 'PL.DUAL', 'PLDUB.DUAL', 'PLDUB',
@@ -59,20 +60,21 @@
 
 	// Add styles
 	GM_addStyle(`.lnlBxO {align-items:start;}`);
-	GM_addStyle(`.srrdb-releases {--highlight-default:${highlightColor};--highlight-hdtv:${highlightHDTVColor};--highlight-foreign:${highlightLanguageColor};background-color:rgba(255,255,255,0.08);border-radius:var(--ipt-cornerRadius);padding:4px 12px;}`);
+	GM_addStyle(`.srrdb-releases {--highlight-default:rgb(245,197,24);--highlight-hdtv:rgb(220,20,40);--highlight-foreign:rgb(127,106,252);background-color:rgba(255,255,255,0.08);border-radius:var(--ipt-cornerRadius);padding:4px 8px;}`);
 	GM_addStyle(`.srrdb-header {font-weight:bold;margin-bottom:0.5rem;}`);
 	GM_addStyle(`.srrdb-footer {font-weight:bold;margin-top:0.5rem;margin-bottom:1rem;text-align:right;}`);
 	GM_addStyle(`.srrdb-header .fa-external-link-alt,.srrdb-footer .fa-external-link-alt {margin-left:0.25rem;scale:0.7;}`);
 	GM_addStyle(`.release {white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10pt;letter-spacing:-0.5px;display:block;}`);
-	GM_addStyle(`.release a {text-shadow:0 0 1px #000;display:inline;}`);
-	GM_addStyle(`.highlight {background-color:rgba(0,0,0,0.15);box-shadow:inset 0px 0px 2px 2px #000000,0px 0px 1px var(--highlight-default);border-radius:4px;border-style:solid;border-width:1px 0;border-color:var(--highlight-default);}`);
-	GM_addStyle(`.highlight-hdtv {box-shadow:inset 0px 0px 2px 2px #000000,0px 0px 1px var(--highlight-hdtv);border-color:var(--highlight-hdtv);}`);
-	GM_addStyle(`.highlight-foreign {box-shadow:inset 0px 0px 2px 2px #000000,0px 0px 1px var(--highlight-foreign);border-color:var(--highlight-foreign);}`);
-	GM_addStyle(`.copy-release-name {display:inline-block;cursor:pointer;margin-right:5px;}`);
-	GM_addStyle(`.have-release-check {color:rgb(103,173,75);margin-right:5px;}`);
-	GM_addStyle(`.blink-text {animation:blinker 0.1s steps(2) 4;}`);
-	GM_addStyle(`@keyframes blinker {from {background-color:rgba(245,197,24,0);} to {color:#000;background-color:rgba(245,197,24,1);}}`);
-
+	GM_addStyle(`.release a {display:inline;border-radius:3px;padding:0 2px;}`);
+	GM_addStyle(`.highlight {background-color:rgba(0,0,0,0.15);box-shadow:inset 0px 0px 2px 1px rgba(0,0,0,0.75);border-radius:4px;border-style:solid;border-width:1px 0;border-color:var(--highlight-default);}`);
+	GM_addStyle(`.highlight-hdtv {border-color:var(--highlight-hdtv);}`);
+	GM_addStyle(`.highlight-foreign {border-color:var(--highlight-foreign);}`);
+	GM_addStyle(`.copy-release-name {display:inline-block;cursor:pointer;margin-right:3px;color:#fff!important;}`);
+	GM_addStyle(`.have-release-check {color:rgb(103,173,75);margin-right:1px;margin-left:2px;}`);
+	GM_addStyle(`.blink-text {animation:blinker 0.1s steps(1) infinite;}`);
+	GM_addStyle(`.blink-text .highlight {background:none;border:none;box-shadow:none;}`);
+	GM_addStyle(`@keyframes blinker {0% {color:#000;background-color:rgba(245,197,24,1);} 50% {color:rgb(245,197,24);background-color:rgba(245,197,24,0);} 100% {color:#000;background-color:rgba(245,197,24,1);}}`);
+	
 	var searchForeign = showForeign ? '' : 'foreign:no/';
 	var searchInternal = showInternal ? '' : '--internal/';
 	var searchHDTV = showHDTV ? '' : '--hdtv/';
@@ -123,25 +125,30 @@
 
 			for (const language of languagesToHighlight) {
 				const regex = new RegExp(`(${language})`, 'ig');
-				releaseNameText = highlightForeign ? releaseNameText.replace(regex, '<span class="highlight highlight-foreign">$1</span>') : releaseNameText;
+
+				if (regex.test(releaseNameText)) {
+					releaseNameText = highlightForeign ? releaseNameText.replace(regex, '<span class="highlight highlight-foreign">$1</span>') : releaseNameText;
+					break;
+				}
 			}
 
+			var haveReleaseCheck = '';
 			if (haveList.includes(releasename)) {
-				releaseNameText = '<i class="fas fa-check-square have-release-check"></i>' + releaseNameText;
+				haveReleaseCheck = '<i class="fas fa-check-square have-release-check"></i>';
 			}
 
-			var repeatHtml = `<li class="release ipc-link ipc-link--baseAlt" title="${releasename}"><i class="ipc-link ipc-link--baseAlt copy-release-name far fa-copy"></i><a class="ipc-link ipc-link--baseAlt" target="_blank" href="${url}">${releaseNameText}</a></li>`;
+			var repeatHtml = `<li class="release ipc-link ipc-link--baseAlt" title="${releasename}"><i class="ipc-link ipc-link--baseAlt copy-release-name far fa-copy"></i>${haveReleaseCheck}<a class="ipc-link ipc-link--baseAlt" target="_blank" href="${url}">${releaseNameText}</a></li>`;
 
 			$("#release-lister").append(repeatHtml);
 		});
 	});
 
 	$(document).on('click', '.copy-release-name', function (evt) {
-		var select = $(this).next();
+		var select = $(this).nextAll('a').first();
 		GM_setClipboard(select.text().trim());
 
 		select.addClass('blink-text');
-		setTimeout(function () { select.removeClass('blink-text'); }, 500);
+		setTimeout(function () { select.removeClass('blink-text'); }, 300);
 
 		evt.preventDefault();
 	});
