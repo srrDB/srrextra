@@ -1,0 +1,161 @@
+.gHKhNg {
+    align-items: start;
+}
+.srrdb-releases {
+    --highlight-default: rgb(255, 255, 180);
+    --highlight-fix: rgb(240, 200, 20);
+    --highlight-hdtv: rgb(255, 60, 60);
+    --highlight-uncut: rgb(245, 150, 160);
+    --highlight-proper: rgb(160, 250, 40);
+    --highlight-foreign: rgb(127, 106, 252);
+    --highlight-foreign: rgb(200, 160, 255);
+    --highlight-internal: rgb(245, 140, 85);
+    --highlight-internal: rgb(255, 130, 30);
+    --highlight-remastered: rgb(80, 220, 210);
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: var(--ipt-cornerRadius);
+    padding: 4px 8px;
+    border:1px solid rgba(255,255,255,0.15);
+}
+.srrdb-block + .srrdb-block {
+    margin-top:0.5em;
+}
+.srrdb-block h4 {
+    font-weight:600;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.srrdb-block .srrdb-block h4 {
+    font-size:10pt;
+    color:rgba(255,255,255,0.5);
+}
+.srrdb-block h4 span {
+    font-weight:200;
+}
+.srrdb-block ul {
+    margin-left:0.5em;
+}
+.srrdb-block.collapsed > ul {
+    display:none;
+}
+.srrdb-header {
+    font-weight:bold;
+    margin-bottom:0.5rem;
+}
+.srrdb-footer {
+    font-weight: bold;
+    margin-top:0.5rem;
+    margin-bottom: 1rem;
+    text-align: right;
+}
+.srrdb-header .fa-external-link-alt,
+.srrdb-footer .fa-external-link-alt {
+    margin-left:0.25rem!important;
+    scale:0.7;
+}
+.srrdb-header .svg-inline--fa,
+.srrdb-footer .svg-inline--fa {
+    margin-left:0.25rem!important;
+    scale:0.75!important;
+}
+.release {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 10pt;
+    letter-spacing: -0.5px;
+    display: block;
+}
+#release-loading {
+    font-size: 10pt;
+    letter-spacing: -0.5px;
+}
+.foreign-toggle,
+.resolution-toggle {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.resolution-toggle:hover h4 {
+    color:rgb(245, 197, 24);
+}
+.foreign-toggle:hover h4 {
+    color:rgba(255,255,255,0.75);
+}
+.collapsed > span > h4 > .fa-square-minus { display:none; }
+.collapsed > span > h4 > .fa-square-plus { display:inline; }
+.expanded > span > h4 > .fa-square-minus { display:inline; }
+.expanded > span > h4 > .fa-square-plus { display:none; }
+.release a {
+    display: inline;
+    border-radius: 3px;
+    padding:0 2px;
+}
+li:hover .highlight {
+    text-decoration: underline;
+}
+.highlight {
+    box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,0.75);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px 0;
+    border-color: var(--highlight-default);
+    text-shadow:0 0 1px rgba(0,0,0,0.5);
+}
+.highlight-border-none .highlight { border-style: none; box-shadow: none; }
+.highlight-border-solid .highlight { border-style: solid; }
+.highlight-border-dashed .highlight { border-style: dashed; }
+
+.highlight-keywords .highlight { color:var(--highlight-default); }
+
+.highlight-keywords .highlight-hdtv { color:var(--highlight-hdtv); }
+.highlight-keywords .highlight-fix { color:var(--highlight-fix); }
+.highlight-keywords .highlight-remastered { color:var(--highlight-remastered); }
+.highlight-keywords .highlight-proper { color:var(--highlight-proper); }
+.highlight-keywords .highlight-uncut { color:var(--highlight-uncut); }
+.highlight-keywords .highlight-foreign { color:var(--highlight-foreign); }
+.highlight-keywords .highlight-internal { color:var(--highlight-internal); }
+
+.highlight-hdtv { border-color: var(--highlight-hdtv); }
+.highlight-fix { border-color: var(--highlight-fix); }
+.highlight-remastered { border-color: var(--highlight-remastered); }
+.highlight-proper { border-color: var(--highlight-proper); }
+.highlight-uncut { border-color: var(--highlight-uncut); }
+.highlight-foreign { border-color: var(--highlight-foreign); }
+.highlight-internal { border-color: var(--highlight-internal); }
+
+.copy-release-name {
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 3px;
+    color: #fff!important;
+}
+.have-release-check {
+    color: rgb(103, 173, 75);
+    margin-right: 1px;
+    margin-left: 2px;
+}
+.blink-text {
+    animation: blinker 0.1s steps(1) infinite;
+}
+.blink-text .highlight {
+    background:none;
+    border:none;
+    box-shadow:none;
+}
+@keyframes blinker {
+    0% {
+        color: #000;
+        background-color: rgba(245, 197, 24, 1);
+    }
+    50% {
+        color: rgb(245, 197, 24);
+        background-color: rgba(245, 197, 24, 0);
+    }
+    100% {
+        color: #000;
+        background-color: rgba(245, 197, 24, 1);
+    }
+}
