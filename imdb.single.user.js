@@ -4,7 +4,7 @@
 // @namespace	https://srrdb.com/
 // @downloadURL	https://github.com/srrDB/srrextra/raw/master/imdb.single.user.js
 // @updateURL	https://github.com/srrDB/srrextra/raw/master/imdb.single.user.js
-// @version		1.0
+// @version		1.0.1
 // @description	Lists releases from srrdb.com on imdb.com
 // @author		Skalman
 // @author		Lazur
@@ -155,6 +155,21 @@
 						const multiPattern = /\.\d{4}(?:\.[^.]+)?\.MULT[Ii](?!.*?SUBS)\./;
 						if (multiPattern.test(item.release)) {
 							isForeign = true;
+						}
+					}
+
+					if (!isForeign) {
+						for (const language of languagesToHighlight) {
+							// Skip MULTI check if considerMultiAsForeign is false
+							if (!considerMultiAsForeign && language.toUpperCase() === 'MULTI') {
+								continue;
+							}
+
+							const regex = new RegExp(`\\.(${language})\\.`, 'i');
+							if (regex.test(item.release)) {
+								isForeign = true;
+								break;
+							}
 						}
 					}
 					
